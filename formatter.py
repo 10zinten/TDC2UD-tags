@@ -1,6 +1,7 @@
 import argparse
-import random
 import re
+from pathlib import Path
+Path('C:\Program Files').parent
 
 POS = [
     'ADJ', 'ADP', 'ADV', 'AUX', 'CCONJ', 'DET', 'INTJ', 'NOUN', 'NUM',
@@ -22,21 +23,10 @@ def rdrformat(in_fn):
                 tg = 'X' if not tg else tg[0]
                 word_tags.append('{}/{}'.format(match[0].rstrip(), tg))
 
-    # shuffle the dataset
-    random.seed(42)
-    random.shuffle(word_tags)
-
-    # split the dataset to train and test dataset
-    split = int(0.9 * len(word_tags))
-    train_set = word_tags[:split]
-    test_set = word_tags[split:]
-
-    # save the train and test dataset
-    with open('goldTrain', 'w') as f:
-        f.write(' '.join(train_set))
-
-    with open('goldTest', 'w') as f:
-        f.write(' '.join(test_set))
+    # save the dataset
+    data_dir = Path(in_fn).parent
+    with open(data_dir/'goldTrain', 'w') as f:
+        f.write(' '.join(word_tags))
 
 
 parser = argparse.ArgumentParser()
