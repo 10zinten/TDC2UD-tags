@@ -9,10 +9,13 @@ POS = [
     'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB', 'X'
 ]
 
+affixes  = ['ས་', 'ར་', 'འི་', 'འོ་', 'འང་', 'འམ་', 'འིའོ་']
+
+
 find_pos = lambda line: [pos for pos in POS if pos in line]
 
 def rdrformat(in_fn, wl):
-    '''Extract word and tag and apply normlization to word if required'''
+    '''Extract word&tag and apply normlization to word if required'''
 
     word_tags = ''
     is_next_shad = False
@@ -46,7 +49,7 @@ def rdrformat(in_fn, wl):
                 tag = 'X' if not tag else tag[0]
 
                 # check for folding word - no tsek for prev word
-                if not is_prev_tsek:
+                if not is_prev_tsek and word in affixes:
                     word = '_'+word
                     is_prev_tsek = True
 
