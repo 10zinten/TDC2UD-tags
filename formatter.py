@@ -15,7 +15,7 @@ def rdrformat(in_fn, wl):
     '''Extract word and tag and apply normlization to word if required'''
 
     word_tags = ''
-    is_next_shea = False
+    is_next_shad = False
     is_prev_tsek = True
 
     with open(in_fn, 'r') as f:
@@ -24,21 +24,22 @@ def rdrformat(in_fn, wl):
             match = re.findall('(.+?)\[', lines[i])
 
             # detect shea in next word
+            is_next_shad = False
+
             if i+1 < len(lines):
                 next_match = re.findall('(.+?)\[', lines[i+1])
                 if next_match:
                     next_word = next_match[0].rstrip()
                     if next_word == '།':
-                        is_next_shea = True
+                        is_next_shad = True
 
             if match:
                 # strip the white-spaces
                 word = match[0].rstrip()
 
                 # put tsek if next word is shea
-                if is_next_shea and i != 0 and word != '།':
+                if is_next_shad and i != 0 and word != '།':
                     word += '་'
-                    is_next_shea = False
 
                 # find POS of the word
                 tag = find_pos(lines[i])
