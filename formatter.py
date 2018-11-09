@@ -38,7 +38,7 @@ def rdrformat(in_fn, wl):
                 word = match[0].rstrip()
 
                 # put tsek if next word is shea
-                if is_next_shad and i != 0 and word != '།':
+                if is_next_shad and not word.endswith('་') and i != 0 and word != '།':
                     word += '་'
 
                 # find POS of the word
