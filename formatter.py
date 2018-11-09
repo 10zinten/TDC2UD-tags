@@ -15,7 +15,7 @@ affixes  = ['ས་', 'ར་', 'འི་', 'འོ་', 'འང་', 'འམ�
 find_pos = lambda line: [pos for pos in POS if pos in line]
 
 def rdrformat(in_fn, wl):
-    '''Extract word&tag and apply normlization to word if required'''
+    '''Extract word&tag and apply normalization to word if required'''
 
     word_tags = ''
     is_next_shad = False
